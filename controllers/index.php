@@ -1,13 +1,11 @@
 <?php
-require ("../entities/Client.php");
-require ("../entities/Produit.php");
+require("../entities/livre.php");
+require("../model/livreManager.php");
 
-//Instance of new Client
-$my_client = new Client("Toto", 56);
-$my_product  = new Produit("Voiture");
+$db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 
-$my_client->addProductToBasket($my_product);
-
+$livreManager = new livreManager($db);
+$books = $livreManager->getBooks();
 
 include "../views/indexVue.php";
  ?>
