@@ -26,6 +26,18 @@ class livreManager {
     return $data;
   }
 
+  //Function to get all the books at once sorted by categorie
+
+  public function getBooksByCategorie($categorie) {
+    $query = $this->getDb()->prepare("SELECT * FROM livre WHERE categorie = ?");
+    $query->execute([$categorie]);
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($data as $key => $value) {
+      $data[$key] = new Livre($value);
+    }
+    return $data;
+  }
+
 }
 
  ?>
