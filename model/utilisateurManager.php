@@ -31,10 +31,12 @@ class utilisateurManager {
     $query = $this->getDb()->prepare("SELECT * FROM utilisateur WHERE personnalCode = ?");
     $query->execute([$personnalCode]);
     $data = $query->fetch(PDO::FETCH_ASSOC);
+    //If a user ha been found creat an object an returns it
     if($data) {
       $user = new Utilisateur($data);
       return $user;
     }
+    //Otherwise returns false
     else {
       return false;
     }

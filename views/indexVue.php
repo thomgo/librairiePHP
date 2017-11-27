@@ -16,18 +16,12 @@
 
 <?php
     foreach ($books as $book) {
-      if ($book->getDispo()) {
-        $statut = "Disponible";
-      }
-      else {
-        $statut = "Emprunté";
-      }
       echo "<p>" .
       "<span> Identifiant : " . $book->getL_id() . "</span>" .
       "<span> Titre : " . $book->getTitre() . "</span>" .
       "<span> Auteur : " . $book->getAuteur() . "</span>" .
       "<span> Date : " . $book->getParution() . "</span>" .
-      "<span> Statut : " . $statut . "</span>" .
+      "<span> Statut : " . $book->getStatut() . "</span>" .
       "<span> Categorie : " . $book->getCategorie() . "</span>" .
       "<span><a href=livre.php?livre=". $book->getL_id() ."> Gérer </a></span>" .
       "</p>";

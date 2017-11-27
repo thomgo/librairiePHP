@@ -6,12 +6,12 @@ require("../model/livreManager.php");
 $db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 $livreManager = new livreManager($db);
 
-//If there is a sorting form submitted and and there is a specific category
-//Get the books sorted by this category
+//Si un formulaire de trie a été soumis avec une catégorie spécifique
 if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {
+  //On récupère les livres de cette catégorie
   $books = $livreManager->getBooksByCategorie($_POST["categorie"]);
 }
-//Otherwise just get all the books
+//Sinon on récupère simplement tous les livres
 else{
   $books = $livreManager->getBooks();
 }

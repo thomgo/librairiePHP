@@ -11,8 +11,8 @@ class Livre {
   protected $parution;
   protected $categorie;
   protected $dispo;
+  protected $statut;
   protected $utilisateur;
-
 
   //Constructor
   public function __construct($array) {
@@ -76,10 +76,27 @@ class Livre {
   //Dispo functions
   public function setDispo($dispo) {
     $this->dispo = $dispo;
+    //Call the statut function to store it in the same time
+    $this->setStatut($this->getDispo());
   }
 
   public function getDispo() {
     return $this->dispo;
+  }
+
+  //Statut functions
+  //Based on dispo attribut store a string in $statut attribut
+  public function setStatut($dispo) {
+    if($dispo) {
+      $this->statut = "Disponible";
+    }
+    else {
+      $this->statut = "Emprunté";
+    }
+  }
+
+  public function getStatut() {
+    return $this->statut;
   }
 
   //Utilisateur functions
