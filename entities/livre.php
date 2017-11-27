@@ -16,6 +16,7 @@ class Livre {
 
   //Constructor
   public function __construct($array) {
+    $this->setDispo(1);
     $this->hydrate($array);
   }
 

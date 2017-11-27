@@ -30,5 +30,6 @@
  ?>
 
  <?php
+   include("Forms/ajoutLivre.php");
    include("template/footer.php")
   ?>

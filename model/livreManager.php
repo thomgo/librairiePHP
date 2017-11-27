@@ -47,6 +47,19 @@ class livreManager {
     return $book;
   }
 
+  //Add book in BDD
+  public function addBook(Livre $book) {
+    $query = $this->getDb()->prepare("INSERT INTO livre (titre, auteur, resume, parution, dispo, categorie) VALUES (:titre, :auteur, :resume, :parution, :dispo, :categorie)");
+    $query->execute([
+      ":titre" => $book->getTitre(),
+      ":auteur"=> $book->getAuteur(),
+      ":resume"=> $book->getResume(),
+      ":parution"=> $book->getParution(),
+      ":dispo"=> $book->getDispo(),
+      ":categorie"=> $book->getCategorie()
+    ]);
+  }
+
   //Update a book
   public function updateBookStatut(Livre $book) {
     $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
