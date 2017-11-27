@@ -23,7 +23,7 @@ else {
 }
 
 if(!empty($_POST["prete"])) {
-  $utilisateur = $utilisateurManager->getuser($_POST["personnalCode"]);
+  $utilisateur = $utilisateurManager->getUser($_POST["personnalCode"]);
   $book->setDispo(0);
   $book->setUtilisateur($utilisateur->getPersonnalCode());
   $livreManager->updateBookStatut($book);
