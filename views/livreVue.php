@@ -7,12 +7,6 @@
 <?php
 
 if($book) {
-  if ($book->getDispo()) {
-    $statut = "Disponible";
-  }
-  else {
-    $statut = "Emprunté";
-  }
   echo
   "<p> Identifiant : " . $book->getL_id() . "</p>" .
   "<p> Titre : " . $book->getTitre() . "</p>" .

@@ -16,6 +16,12 @@ $book = false;
 // On récupère les informations relatives à ce livre pour affichage
 if(isset($_GET["livre"])) {
   $book = $livreManager->getBook($_GET["livre"]);
+  if ($book->getDispo()) {
+    $statut = "Disponible";
+  }
+  else {
+    $statut = "Emprunté";
+  }
 }
 //Sinon on crée un message d'erreur
 else {
@@ -24,15 +30,19 @@ else {
 
 if(!empty($_POST["prete"])) {
   $utilisateur = $utilisateurManager->getUser($_POST["personnalCode"]);
-  $book->setDispo(0);
-  $book->setUtilisateur($utilisateur->getPersonnalCode());
-  $livreManager->updateBookStatut($book);
+  if($utilisateur) {
+    $book->setDispo(0);
+    $book->setUtilisateur($utilisateur->getPersonnalCode());
+    $livreManager->updateBookStatut($book);
+    $statut = "Emprunté";
+  }
 }
 
 if(!empty($_POST["rendu"])) {
   $book->setDispo(1);
   $book->setUtilisateur(null);
   $livreManager->updateBookStatut($book);
+  $statut = "Disponible";
 }
 
 

@@ -31,8 +31,13 @@ class utilisateurManager {
     $query = $this->getDb()->prepare("SELECT * FROM utilisateur WHERE personnalCode = ?");
     $query->execute([$personnalCode]);
     $data = $query->fetch(PDO::FETCH_ASSOC);
-    $user = new Utilisateur($data);
-    return $user;
+    if($data) {
+      $user = new Utilisateur($data);
+      return $user;
+    }
+    else {
+      return false;
+    }
   }
 
 }
