@@ -1,4 +1,5 @@
 <?php
+require_once("../services/hydrator.php");
 require("../entities/livre.php");
 require("../model/livreManager.php");
 
@@ -7,7 +8,7 @@ $livreManager = new livreManager($db);
 
 //If there is a sorting form submitted and and there is a specific category
 //Get the books sorted by this category
-if(!empty($_POST["trie"] && $_POST["categorie"] != "false")) {
+if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {
   $books = $livreManager->getBooksByCategorie($_POST["categorie"]);
 }
 //Otherwise just get all the books

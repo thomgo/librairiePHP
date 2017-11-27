@@ -47,6 +47,16 @@ class livreManager {
     return $book;
   }
 
+  //Update a book
+  public function updateBookStatut(Livre $book) {
+    $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
+    $query->execute([
+      ":dispo"=> $book->getDispo(),
+      ":utilisateur"=> $book->getUtilisateur(),
+      ":id" => $book->getL_id()
+    ]);
+  }
+
 }
 
  ?>

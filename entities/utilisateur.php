@@ -1,5 +1,4 @@
 <?php
-require("../services/hydrator.php");
 
 class Utilisateur {
   use Hydrator;

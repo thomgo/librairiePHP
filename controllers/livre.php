@@ -1,9 +1,13 @@
 <?php
-require("../entities/livre.php");
-require("../model/livreManager.php");
+require_once("../services/hydrator.php");
+require_once("../entities/livre.php");
+require_once("../entities/utilisateur.php");
+require_once("../model/livreManager.php");
+require_once("../model/utilisateurManager.php");
 
 $db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 $livreManager = new livreManager($db);
+$utilisateurManager = new utilisateurManager($db);
 
 //Pas de livre sélectionné par défaut
 $book = false;
@@ -16,6 +20,19 @@ if(isset($_GET["livre"])) {
 //Sinon on crée un message d'erreur
 else {
   $message = "Hum bizare, il semble que vous n'avez pas sélectionné de livre";
+}
+
+if(!empty($_POST["prete"])) {
+  $utilisateur = $utilisateurManager->getuser($_POST["personnalCode"]);
+  $book->setDispo(0);
+  $book->setUtilisateur($utilisateur->getPersonnalCode());
+  $livreManager->updateBookStatut($book);
+}
+
+if(!empty($_POST["rendu"])) {
+  $book->setDispo(1);
+  $book->setUtilisateur(null);
+  $livreManager->updateBookStatut($book);
 }
 
 
