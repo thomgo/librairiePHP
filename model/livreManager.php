@@ -38,6 +38,15 @@ class livreManager {
     return $data;
   }
 
+//Get a single book based on id
+  public function getBook($id) {
+    $query = $this->getDb()->prepare("SELECT * FROM livre WHERE l_id = ?");
+    $query->execute([$id]);
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    $book = new Livre($data);
+    return $book;
+  }
+
 }
 
  ?>

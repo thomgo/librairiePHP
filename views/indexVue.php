@@ -29,6 +29,7 @@
       "<span> Date : " . $book->getParution() . "</span>" .
       "<span> Statut : " . $statut . "</span>" .
       "<span> Categorie : " . $book->getCategorie() . "</span>" .
+      "<span><a href=livre.php?livre=". $book->getL_id() ."> Gérer </a></span>" .
       "</p>";
     }
 
