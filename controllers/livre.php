@@ -5,6 +5,9 @@ require("../model/livreManager.php");
 $db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 $livreManager = new livreManager($db);
 
+//Pas de livre sélectionné par défaut
+$book = false;
+
 //Si on trouve dans l'url l'id d'un livre
 // On récupère les informations relatives à ce livre pour affichage
 if(isset($_GET["livre"])) {
