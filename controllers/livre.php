@@ -1,8 +1,8 @@
 <?php
 //On charge les classes, les outils et les managers
 require_once("../services/hydrator.php");
-require_once("../entities/livre.php");
 require_once("../entities/utilisateur.php");
+require_once("../entities/livre.php");
 require_once("../model/livreManager.php");
 require_once("../model/utilisateurManager.php");
 
@@ -16,7 +16,7 @@ $book = false;
 //Si on trouve dans l'url l'id d'un livre
 if(isset($_GET["livre"])) {
   // On récupère les informations relatives à ce livre pour affichage
-  $book = $livreManager->getBook($_GET["livre"]);
+  $book = $livreManager->getBookAndUser($_GET["livre"]);
 }
 //Sinon on crée un message d'erreur
 else {

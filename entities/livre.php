@@ -102,7 +102,17 @@ class Livre {
 
   //Utilisateur functions
   public function setUtilisateur($utilisateur) {
-    $this->utilisateur = $utilisateur;
+    if(is_array($utilisateur)){
+      if(isset($utilisateur["firstName"], $utilisateur["lastName"], $utilisateur["age"], $utilisateur["city"], $utilisateur["phone"], $utilisateur["mail"], $utilisateur["personnalCode"])) {
+        $this->utilisateur = new Utilisateur($utilisateur);
+      }
+      else {
+        $this->utilisateur = false;
+      }
+    }
+    else {
+      $this->utilisateur = $utilisateur;
+    }
   }
 
   public function getUtilisateur() {

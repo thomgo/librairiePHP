@@ -47,6 +47,16 @@ class livreManager {
     return $book;
   }
 
+  //Get a single book based on id
+    public function getBookAndUser($id) {
+      $query = $this->getDb()->prepare("SELECT * FROM livre AS l LEFT JOIN utilisateur AS u ON l.utilisateur = u.personnalCode WHERE l.l_id = ?");
+      $query->execute([$id]);
+      $data = $query->fetch(PDO::FETCH_ASSOC);
+      $book = new Livre($data);
+      $book->setUtilisateur($data);
+      return $book;
+    }
+
   //Add book in BDD
   public function addBook(Livre $book) {
     $query = $this->getDb()->prepare("INSERT INTO livre (titre, auteur, resume, parution, dispo, categorie) VALUES (:titre, :auteur, :resume, :parution, :dispo, :categorie)");
