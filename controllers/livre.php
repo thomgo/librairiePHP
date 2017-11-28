@@ -32,6 +32,7 @@ if(!empty($_POST["prete"])) {
     $book->setDispo(0);
     $book->setUtilisateur($utilisateur->getPersonnalCode());
     $livreManager->updateBookStatut($book);
+    header("Refresh: 0");
   }
 }
 

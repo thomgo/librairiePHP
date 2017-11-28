@@ -102,14 +102,19 @@ class Livre {
 
   //Utilisateur functions
   public function setUtilisateur($utilisateur) {
+    //Si l'argument passé est un tableau
     if(is_array($utilisateur)){
+      //Et que ce tableau contient les informations d'un utilisateur
       if(isset($utilisateur["firstName"], $utilisateur["lastName"], $utilisateur["age"], $utilisateur["city"], $utilisateur["phone"], $utilisateur["mail"], $utilisateur["personnalCode"])) {
+        //On hydrate un utilisateur avec ce tableau et on le stoque dans l'attribut utilisateur du livre
         $this->utilisateur = new Utilisateur($utilisateur);
       }
+      //Si le tableau ne contient pas d'informations utilisateur on stoque false
       else {
         $this->utilisateur = false;
       }
     }
+    //Si l'argument n'est pas un tableau, c'est donc un code qu'on stoque
     else {
       $this->utilisateur = $utilisateur;
     }

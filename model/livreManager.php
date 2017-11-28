@@ -47,12 +47,14 @@ class livreManager {
     return $book;
   }
 
-  //Get a single book based on id
+  //Get a single book with user based on id
     public function getBookAndUser($id) {
       $query = $this->getDb()->prepare("SELECT * FROM livre AS l LEFT JOIN utilisateur AS u ON l.utilisateur = u.personnalCode WHERE l.l_id = ?");
       $query->execute([$id]);
       $data = $query->fetch(PDO::FETCH_ASSOC);
+      //Crée un noulivre avec les données
       $book = new Livre($data);
+      //Hydrate un nouvel utilisateur sur la base du tableau
       $book->setUtilisateur($data);
       return $book;
     }
