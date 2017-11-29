@@ -95,8 +95,38 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+h1, .nav a {
+  font-family: 'Dancing Script', cursive;
+}
 
+.bgViolet {
+  background-color: #9fa0c3;
+}
 
+.bgBlue{
+  background-color: #aed9e0;
+}
+
+.nav a {
+  color: black;
+  font-size: 1.5em;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+}
+
+.shortInput input {
+  max-width: 300px;
+}
+
+#trie select {
+  max-width: 300px;
+}
 /* ##################################################################### */
 /* ##########################   SMARTPHONE   ########################### */
 /* ##################################################################### */
