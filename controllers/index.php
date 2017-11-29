@@ -1,7 +1,7 @@
 <?php
-require_once("../services/hydrator.php");
-require("../entities/livre.php");
-require("../model/livreManager.php");
+//On charge l'autoloader (voir les services)
+require_once("../services/Autoloader.php");
+Autoloader::autoload();
 
 $db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 $livreManager = new livreManager($db);

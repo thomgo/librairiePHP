@@ -1,10 +1,7 @@
 <?php
-//On charge les classes, les outils et les managers
-require_once("../services/hydrator.php");
-require_once("../entities/utilisateur.php");
-require_once("../entities/livre.php");
-require_once("../model/livreManager.php");
-require_once("../model/utilisateurManager.php");
+//On charge l'autoloader (voir services)
+require_once("../services/Autoloader.php");
+Autoloader::autoload();
 
 $db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
 $livreManager = new livreManager($db);
