@@ -3,8 +3,8 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$livreManager = new livreManager(dataBase::BD());
-$utilisateurManager = new utilisateurManager(dataBase::BD());
+$livreManager = new livreManager();
+$utilisateurManager = new utilisateurManager();
 
 //Pas de livre sélectionné par défaut
 $book = false;
@@ -28,7 +28,7 @@ if(!empty($_POST["prete"])) {
     $book->setDispo(0);
     $book->setUtilisateur($utilisateur->getPersonnalCode());
     $livreManager->updateBookStatut($book);
-    header("Refresh: 0");
+    // header("Refresh: 0");
   }
 }
 
