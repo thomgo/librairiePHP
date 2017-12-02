@@ -3,8 +3,7 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
-$livreManager = new livreManager($db);
+$livreManager = new livreManager();
 
 //Si un formulaire d'ajout de livre a été soumis
 if(!empty($_POST["ajoutLivre"])) {

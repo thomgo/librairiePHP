@@ -3,8 +3,8 @@
 class utilisateurManager {
   private $_db;
 
-  public function __construct($pdo) {
-    $this->setDb($pdo);
+  public function __construct() {
+    $this->setDb(dataBase::BD());
   }
 
   public function setDb($connection) {

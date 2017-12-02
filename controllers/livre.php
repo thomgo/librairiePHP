@@ -3,9 +3,8 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$db = new PDO('mysql:host=localhost;dbname=librairie', 'root', 'ThomAdmin12');
-$livreManager = new livreManager($db);
-$utilisateurManager = new utilisateurManager($db);
+$livreManager = new livreManager(dataBase::BD());
+$utilisateurManager = new utilisateurManager(dataBase::BD());
 
 //Pas de livre sélectionné par défaut
 $book = false;

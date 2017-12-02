@@ -5,7 +5,7 @@ class Autoloader {
   //On enregistre dans des constantes de classe les entités, les services et les managers
   const entities = ["Livre", "Utilisateur"];
   const services= ["Autoloader", "Hydrator"];
-  const managers = ["livreManager", "utilisateurManager"];
+  const managers = ["livreManager", "utilisateurManager", "dataBase"];
 
   //Fonction qui appelle l'autoload register qui se base sur la fonction statique loader
   static public function autoload() {
