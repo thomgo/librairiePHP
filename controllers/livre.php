@@ -25,18 +25,16 @@ if(!empty($_POST["prete"])) {
   $utilisateur = $utilisateurManager->getUser($_POST["personnalCode"]);
   //Si on a trouvé un utilisateur on met à jour le livre
   if($utilisateur) {
-    $book->setDispo(0);
-    $book->setUtilisateur($utilisateur->getPersonnalCode());
-    $livreManager->updateBookStatut($book);
-    // header("Refresh: 0");
+    $book->setUtilisateur($utilisateur);
+    $livreManager->borrowBook($book);
   }
 }
 
 //Si un formulaire de rendu a été soumis on update le livre
 if(!empty($_POST["rendu"])) {
   $book->setDispo(1);
-  $book->setUtilisateur(null);
-  $livreManager->updateBookStatut($book);
+  $book->unsetUtilisateur();
+  $livreManager->turnBookBack($book);
 }
 
 

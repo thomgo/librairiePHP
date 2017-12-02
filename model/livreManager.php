@@ -18,7 +18,7 @@ class livreManager {
   //Function to get all the books at once
 
   public function getBooks() {
-    $query = $this->getDb()->query('SELECT * FROM livre');
+    $query = $this->getDb()->query('SELECT l_id, titre, auteur, resume, parution, dispo, categorie FROM livre');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
       $data[$key] = new Livre($value);
@@ -29,7 +29,7 @@ class livreManager {
   //Function to get all the books at once sorted by categorie
 
   public function getBooksByCategorie($categorie) {
-    $query = $this->getDb()->prepare("SELECT * FROM livre WHERE categorie = ?");
+    $query = $this->getDb()->prepare("SELECT l_id, titre, auteur, resume, parution, dispo, categorie FROM livre WHERE categorie = ?");
     $query->execute([$categorie]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
@@ -38,24 +38,22 @@ class livreManager {
     return $data;
   }
 
-//Get a single book based on id
-  public function getBook($id) {
-    $query = $this->getDb()->prepare("SELECT * FROM livre WHERE l_id = ?");
-    $query->execute([$id]);
-    $data = $query->fetch(PDO::FETCH_ASSOC);
-    $book = new Livre($data);
-    return $book;
-  }
-
   //Get a single book with user based on id
     public function getBookAndUser($id) {
-      $query = $this->getDb()->prepare("SELECT * FROM livre AS l LEFT JOIN utilisateur AS u ON l.utilisateur = u.personnalCode WHERE l.l_id = ?");
+      $query = $this->getDb()->prepare("SELECT
+        l.l_id, l.titre, l.auteur, l.resume, l.parution, l.dispo, l.categorie,
+        u.firstName, u.lastName, u.age, u.city, u.phone, u.mail, u.personnalCode
+        FROM livre AS l
+        LEFT JOIN utilisateur AS u
+        ON l.utilisateur = u.personnalCode
+        WHERE l.l_id = ?");
       $query->execute([$id]);
       $data = $query->fetch(PDO::FETCH_ASSOC);
       //Crée un noulivre avec les données
       $book = new Livre($data);
+      $user = new Utilisateur($data);
       //Hydrate un nouvel utilisateur sur la base du tableau
-      $book->setUtilisateur($data);
+      $book->setUtilisateur($user);
       return $book;
     }
 
@@ -73,7 +71,16 @@ class livreManager {
   }
 
   //Update a book
-  public function updateBookStatut(Livre $book) {
+  public function borrowBook(Livre $book) {
+    $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
+    $query->execute([
+      ":dispo"=> $book->getDispo(),
+      ":utilisateur"=> $book->getUtilisateur()->getPersonnalCode(),
+      ":id" => $book->getL_id()
+    ]);
+  }
+
+  public function turnBookBack(Livre $book) {
     $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
     $query->execute([
       ":dispo"=> $book->getDispo(),
