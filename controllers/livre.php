@@ -32,7 +32,6 @@ if(!empty($_POST["prete"])) {
 
 //Si un formulaire de rendu a été soumis on update le livre
 if(!empty($_POST["rendu"])) {
-  $book->setDispo(1);
   $book->unsetUtilisateur();
   $livreManager->turnBookBack($book);
 }
