@@ -6,7 +6,7 @@
 class dataBase
 {
 
-const host  = "localhost";
+const host  = "";
 const dbName = "";
 const login = "";
 const mdp = "";
