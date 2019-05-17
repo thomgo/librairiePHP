@@ -26,12 +26,23 @@ class utilisateurManager {
     return $data;
   }
 
-  //function to get one user based on it's ID
+  //function to get one user based on it's ID with the books he borrowed
   public function getUserById($id) {
-    $query = $this->getDb()->prepare('SELECT * FROM utilisateur WHERE u_id = ?');
+    $query = $this->getDb()->prepare('SELECT
+      l.titre, l.auteur, l.parution, l.categorie,
+      u.u_id, u.firstName, u.lastName, u.age, u.city, u.phone, u.mail, u.personnalCode
+      FROM utilisateur AS u LEFT JOIN livre AS l ON l.utilisateur = u.personnalCode
+      WHERE u.u_id = ?');
     $query->execute([$id]);
-    $data = $query->fetch(PDO::FETCH_ASSOC);
-    return new Utilisateur($data);
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    //Create the user with the first row and then instanciate each book
+    $user = new Utilisateur($data[0]);
+    foreach ($data as $key => $book) {
+      $book = new Livre($book);
+      $book->setUtilisateur($user);
+      $user->addBook($book);
+    }
+    return $user;
   }
 
 

@@ -11,6 +11,7 @@ class Utilisateur {
   protected $phone;
   protected $mail;
   protected $personnalCode;
+  protected $books = [];
 
   //Constructor
   public function __construct($array) {
@@ -19,11 +20,11 @@ class Utilisateur {
 
   //ID functions
   public function setU_id($id) {
-    $this->l_id = $id;
+    $this->u_id = $id;
   }
 
   public function getU_id() {
-    return $this->l_id;
+    return $this->u_id;
   }
 
   //FirstName functions
@@ -97,5 +98,18 @@ class Utilisateur {
     }
     $this->setPersonnalCode($code);
   }
+
+  public function getBooks() {
+    return $this->books;
+  }
+
+  //Add a book to the books array
+  public function addBook(Livre $book) {
+    //avoid empty books to be pushed
+    if($book->getTitre()){
+      array_push($this->books, $book);
+    }
+  }
+
 }
 ?>

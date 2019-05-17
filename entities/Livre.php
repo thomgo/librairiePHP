@@ -102,6 +102,7 @@ class Livre {
 
   //Utilisateur functions
   public function setUtilisateur(Utilisateur $utilisateur) {
+    //avoid empty user to be add
     if($utilisateur->getfirstName()) {
       $this->utilisateur = $utilisateur;
       $this->setDispo(0);

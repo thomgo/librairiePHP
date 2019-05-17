@@ -27,6 +27,24 @@ if($user) {
           </div>
         </div>
       </div>
+      <div class="col-6">
+        <div class="card mb-3">
+          <div class="card-header bgBlue text-center">
+            <h5 class="card-title">Livres empruntés <i class="fas fa-book"></i></h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <?php
+                foreach ($user->getBooks() as $key => $book) {
+              ?>
+                  <li class='list-group-item'><?php echo $book->getTitre() . " de " . $book->getAuteur(); ?></li>
+              <?php
+                }
+               ?>
+            </ul>
+          </div>
+        </div>
+      </div>
   </div>
 <?php
 }
