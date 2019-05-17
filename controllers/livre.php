@@ -37,5 +37,5 @@ if(!empty($_POST["rendu"])) {
 }
 
 
-include "../views/livreVue.php";
+include "../views/livreView.php";
  ?>

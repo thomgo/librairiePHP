@@ -23,5 +23,5 @@ else{
   $books = $livreManager->getBooks();
 }
 
-include "../views/indexVue.php";
+include "../views/indexView.php";
  ?>

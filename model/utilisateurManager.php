@@ -26,6 +26,14 @@ class utilisateurManager {
     return $data;
   }
 
+  //function to get one user based on it's ID
+  public function getUserById($id) {
+    $query = $this->getDb()->prepare('SELECT * FROM utilisateur WHERE u_id = ?');
+    $query->execute([$id]);
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    return new Utilisateur($data);
+  }
+
 //Get a single user based on personnalCode
   public function getUser($personnalCode) {
     $query = $this->getDb()->prepare("SELECT * FROM utilisateur WHERE personnalCode = ?");

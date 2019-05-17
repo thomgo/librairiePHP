@@ -24,7 +24,7 @@
           <a class="nav-link" href="index.php">Catalogue</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Usagers</a>
+          <a class="nav-link" href="users.php">Usagers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Etat des prêts</a>
