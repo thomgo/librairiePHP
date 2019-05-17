@@ -6,10 +6,10 @@
 class dataBase
 {
 
-const host  = "";
-const dbName = "";
-const login = "";
-const mdp = "";
+const host  = "localhost";
+const dbName = "librairie";
+const login = "root";
+const mdp = "ThomAdmin12";
 
 static public function BD() {
   $db = new PDO("mysql:host=" . self::host .";dbname=" . self::dbName , self::login, self::mdp);
