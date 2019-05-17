@@ -5,7 +5,7 @@
 <h2 class="text-center mb-4">Liste des livres en stock</h2>
 
 <div class="flex">
-  <!-- Formulaire de trie -->
+  <!-- Sorting form -->
   <form action="" method="post" class="flex">
     <select class="form-control mr-3" name="categorie">
       <option value="false">Toutes catégories</option>
@@ -18,14 +18,15 @@
 
   <!-- Button trigger modal -->
   <button type="button" class="btn bgViolet ml-3" data-toggle="modal" data-target="#exampleModal">
-    Ajouter un livre
+    Ajouter un livre <i class="fas fa-feather-alt"></i>
   </button>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content py-2 px-2">
-        <?php include("Forms/ajoutLivre.php"); ?>
+      <div class="modal-content p-3">
+        <h3 class="text-center mb-2">Nouveau livre</h3>
+        <?php include("Forms/addBook.php"); ?>
       </div>
     </div>
   </div>

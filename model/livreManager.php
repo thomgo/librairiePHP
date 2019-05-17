@@ -4,6 +4,7 @@ class livreManager {
   private $_db;
 
   public function __construct() {
+    //We store a PDO connexion when the manager in instanciated
     $this->setDb(dataBase::BD());
   }
 
@@ -16,7 +17,6 @@ class livreManager {
   }
 
   //Function to get all the books at once
-
   public function getBooks() {
     $query = $this->getDb()->query('SELECT l_id, titre, auteur, resume, parution, dispo, categorie FROM livre');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +27,6 @@ class livreManager {
   }
 
   //Function to get all the books at once sorted by categorie
-
   public function getBooksByCategorie($categorie) {
     $query = $this->getDb()->prepare("SELECT l_id, titre, auteur, resume, parution, dispo, categorie FROM livre WHERE categorie = ?");
     $query->execute([$categorie]);

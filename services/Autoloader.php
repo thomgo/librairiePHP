@@ -1,19 +1,18 @@
 <?php
-//Class pour la chargement automatique des class_exists
-//On utilise principalement les constantes éviter l'instanciation d'un objet
+//Class for autoloading of classes in the app
 class Autoloader {
-  //On enregistre dans des constantes de classe les entités, les services et les managers
+  //Entities, services and managers list are stored in class constants
   const entities = ["Livre", "Utilisateur"];
   const services= ["Autoloader", "Hydrator"];
   const managers = ["livreManager", "utilisateurManager", "dataBase"];
 
-  //Fonction qui appelle l'autoload register qui se base sur la fonction statique loader
+  //Function to call autoload register with the static loader function
   static public function autoload() {
     spl_autoload_register(array(__CLASS__, 'loader'));
   }
 
-  //Fonction qui require les fichiers selon leur nom de class
-  //par exemple si le nom est trouvé dans le tableau des entités on charge une entité
+  //The loader function requieres files according to the class that has been asked
+  //For exempel if the class name is an entity the we load it from entities
   static public function loader($class){
     if(in_array($class, self::entities)) {
       require("../entities/" . $class . ".php");
