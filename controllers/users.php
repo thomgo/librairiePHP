@@ -5,13 +5,19 @@ Autoloader::autoload();
 
 $userManager = new utilisateurManager();
 
-// //If a form to add a book has been submitted
-// if(!empty($_POST["ajoutLivre"])) {
-//   //We create a new book object from the form
-//   $book = new Livre($_POST);
-//   //We store the book in the database
-//   $livreManager->addBook($book);
-// }
+//If a form to add a user has been submitted
+if(!empty($_POST["addUser"])) {
+  //We create a new book object from the form
+  $user = new Utilisateur($_POST);
+  //We generate a random personnal code
+  $user->generatePersonnalCode();
+  //Check if the code is unique
+  while (!$userManager->checkCode($user)) {
+    $user->generatePersonnalCode();
+  }
+  //We store the user in the database
+  $userManager->addUser($user);
+}
 
 // //If a sorting form with a category has been submitted
 // if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {

@@ -50,6 +50,30 @@ class utilisateurManager {
     }
   }
 
+  //Function to check if the personnal code is already in use
+  public function checkCode(Utilisateur $user) {
+    $query = $this->getDb()->prepare('SELECT * FROM utilisateur WHERE personnalCode = ?');
+    $query->execute([$user->getPersonnalCode()]);
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    if(!empty($result)) {
+      return false;
+    }
+    return true;
+  }
+
+  //Function to add a user in data base
+  public function addUser(Utilisateur $user) {
+    $query = $this->getDb()->prepare("INSERT INTO utilisateur (firstName, lastName, age, city, phone, mail, personnalCode) VALUES (:firstName, :lastName, :age, :city, :phone, :mail, :personnalCode)");
+    $query->execute([
+      ":firstName" => $user->getFirstName(),
+      ":lastName"=> $user->getLastName(),
+      ":age"=> $user->getAge(),
+      ":city"=> $user->getCity(),
+      ":phone"=> $user->getPhone(),
+      ":mail"=> $user->getMail(),
+      ":personnalCode"=> $user->getPersonnalCode()
+    ]);
+  }
 }
 
  ?>

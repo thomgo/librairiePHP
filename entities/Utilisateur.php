@@ -88,5 +88,14 @@ class Utilisateur {
   public function getPersonnalCode() {
     return $this->personnalCode;
   }
+
+  //Function to randomly generate a nine digits code
+  public function generatePersonnalCode() {
+    $code  = "";
+    for ($i=0; $i < 9; $i++) {
+      $code .= mt_rand(0,9);
+    }
+    $this->setPersonnalCode($code);
+  }
 }
 ?>

@@ -26,7 +26,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content p-3">
         <h3 class="text-center mb-2">Nouvel utilisateur</h3>
-        <?php include("Forms/ajoutLivre.php"); ?>
+        <?php include("Forms/addUtilisateur.php"); ?>
       </div>
     </div>
   </div>
