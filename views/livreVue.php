@@ -4,7 +4,7 @@
 
 <h2 class="mb-3">Gestion du livre</h2>
 <?php
-//Si on a bien un livre trouvé en base de données on affiche ses infos
+//If a book was found in database we show the information
 if($book) {
   ?>
   <div class="row">
@@ -24,12 +24,10 @@ if($book) {
               <li class='list-group-item'><span class="font-weight-bold">Résumé : </span><?php echo $book->getResume() ?></li>
               <li class='list-group-item'>
                 <?php
-                  //Selon la disponibilité du livre on affiche le formulaire correspondant
-                  //Si le livre est dispo on affiche le formulaire d'Emprunt
+                  //Show the the right form according to the disponibility of the book
                   if($book->getDispo()) {
                     include("../views/Forms/Emprunt.php");
                   }
-                  //Sinon on affiche le formulaire de rendu
                   else {
                     include("../views/Forms/Rendu.php");
                   }
@@ -62,7 +60,7 @@ if($book) {
   </div>
 <?php
 }
-//Sinon on affiche le message d'erreur
+//If no book was found we display the error message
 else{
   echo $message;
 }

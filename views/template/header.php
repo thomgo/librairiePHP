@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/css/main.css">
   </head>
   <body>
-    <!-- Header avec titre principal -->
+    <!-- Header with main title -->
     <header class="jumbotron jumbotron-fluid bgViolet mb-0">
       <div class="container">
         <h1 class="display-3">Ex Libris <i class="fas fa-paper-plane"></i></h1>
@@ -35,5 +35,5 @@
       </ul>
     </div>
 
-    <!-- Début du contenu principal -->
+    <!-- Start of the main container -->
     <main class="container">

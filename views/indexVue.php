@@ -5,7 +5,7 @@
 <h2 class="text-center mb-4">Liste des livres en stock</h2>
 
 <div class="flex">
-  <!-- Formulaire de trie -->
+  <!-- Sorting form -->
   <form action="" method="post" class="flex">
     <select class="form-control mr-3" name="categorie">
       <option value="false">Toutes catégories</option>
