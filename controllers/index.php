@@ -1,24 +1,24 @@
 <?php
-//On charge l'autoloader (voir les services)
+//load the autoloader to avoid extra requires
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
 $livreManager = new livreManager();
 
-//Si un formulaire d'ajout de livre a été soumis
+//If a form to add a book has been submitted
 if(!empty($_POST["ajoutLivre"])) {
-  //On crée un objet livre sur la base du formulaire
+  //We create a new book object from the form
   $book = new Livre($_POST);
-  //On enregistre le livre en base de données
+  //We store the book in the database
   $livreManager->addBook($book);
 }
 
-//Si un formulaire de trie a été soumis avec une catégorie spécifique
+//If a sorting form with a category has been submitted
 if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {
-  //On récupère les livres de cette catégorie
+  //We get from the database the books with that category
   $books = $livreManager->getBooksByCategorie($_POST["categorie"]);
 }
-//Sinon on récupère simplement tous les livres
+//Otherwise we just get all the books
 else{
   $books = $livreManager->getBooks();
 }

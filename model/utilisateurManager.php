@@ -4,6 +4,7 @@ class utilisateurManager {
   private $_db;
 
   public function __construct() {
+    //We store a PDO connexion when the manager in instanciated
     $this->setDb(dataBase::BD());
   }
 
@@ -16,7 +17,6 @@ class utilisateurManager {
   }
 
   //Function to get all the users at once
-
   public function getUsers() {
     $query = $this->getDb()->query('SELECT * FROM utilisateur');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
