@@ -34,6 +34,18 @@ class utilisateurManager {
     return new Utilisateur($data);
   }
 
+
+  //Get user sorted according to a form
+  public function getUserSorted($research) {
+    $query = $this->getDb()->prepare('SELECT * FROM utilisateur WHERE firstName = :research OR lastName = :research OR personnalCode = :research');
+    $query->execute([":research" => $research]);
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($data as $key => $value) {
+      $data[$key] = new Utilisateur($value);
+    }
+    return $data;
+  }
+
 //Get a single user based on personnalCode
   public function getUser($personnalCode) {
     $query = $this->getDb()->prepare("SELECT * FROM utilisateur WHERE personnalCode = ?");

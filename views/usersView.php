@@ -7,12 +7,7 @@
 <div class="flex">
   <!-- Sorting form -->
   <form action="" method="post" class="flex">
-    <select class="form-control mr-3" name="categorie">
-      <option value="false">Toutes catégories</option>
-     <option value="fantastique">Fantastique</option>
-     <option value="poesie">Poesie</option>
-     <option value="roman">Roman</option>
-    </select>
+    <input class="form-control mr-2" type="text" name="userSearch" value="" placeholder="Nom, prénom ou code">
     <input class="btn bgViolet"type="submit" name="trie" value="Trier">
   </form>
 

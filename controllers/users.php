@@ -19,15 +19,15 @@ if(!empty($_POST["addUser"])) {
   $userManager->addUser($user);
 }
 
-// //If a sorting form with a category has been submitted
-// if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {
-//   //We get from the database the books with that category
-//   $books = $livreManager->getBooksByCategorie($_POST["categorie"]);
-// }
-// //Otherwise we just get all the books
-// else{
-//   $books = $livreManager->getBooks();
-// }
-$users = $userManager->getUsers();
+//If a sorting form has been submitted
+if(isset($_POST['trie']) && !empty($_POST["userSearch"])) {
+  //We get from the database the users that match the request
+  $users = $userManager->getUserSorted($_POST["userSearch"]);
+}
+//Otherwise we just get all the users
+else{
+  $users = $userManager->getUsers();
+}
+
 include "../views/usersView.php";
  ?>
