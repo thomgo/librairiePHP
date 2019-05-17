@@ -18,7 +18,7 @@
 
   <!-- Button trigger modal -->
   <button type="button" class="btn bgViolet ml-3" data-toggle="modal" data-target="#exampleModal">
-    Ajouter un livre
+    Ajouter un livre <i class="fas fa-feather-alt"></i>
   </button>
 
   <!-- Modal -->

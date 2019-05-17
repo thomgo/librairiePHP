@@ -1,7 +1,7 @@
       </main>
-    <footer class="jumbotron jumbotron-fluid mt-4 mb-0 bgViolet">
+    <footer class="jumbotron jumbotron-fluid mt-4 mb-0 bgViolet text-center">
       <div class="container">
-        <p class="lead">Réalisé par Thomas Gossart pour le programme PHP de Simplon Roubaix</p>
+        <p class="lead">Réalisé par Thomas Gossart pour l'apprentissage du PHP et de la programmation orientée objet</p>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

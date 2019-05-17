@@ -89,10 +89,10 @@ class Livre {
   //Based on dispo attribut store a string in $statut attribut
   public function setStatut($dispo) {
     if($dispo) {
-      $this->statut = "Disponible";
+      $this->statut = "<i class='far fa-check-circle' style='color:green'></i>";
     }
     else {
-      $this->statut = "Emprunté";
+      $this->statut = "<i class='far fa-times-circle' style='color:red'></i>";
     }
   }
 
