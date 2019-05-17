@@ -24,7 +24,8 @@
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content py-2 px-2">
+      <div class="modal-content p-3">
+        <h3 class="text-center mb-2">Nouveau livre</h3>
         <?php include("Forms/ajoutLivre.php"); ?>
       </div>
     </div>
