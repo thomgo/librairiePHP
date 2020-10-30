@@ -15,17 +15,17 @@ if($book) {
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class='list-group-item'><span class="font-weight-bold">Identifiant : </span><?php echo $book->getL_id(); ?></li>
-              <li class='list-group-item'><span class="font-weight-bold">Titre : </span><?php echo $book->getTitre() ?>:</li>
-              <li class='list-group-item'><span class="font-weight-bold">Auteur : </span><?php echo $book->getAuteur() ?></li>
-              <li class='list-group-item'><span class="font-weight-bold">Date : </span><?php echo $book->getParution() ?></li>
-              <li class='list-group-item'><span class="font-weight-bold">Statut : </span><?php echo $book->getStatut() ?></li>
-              <li class='list-group-item'><span class="font-weight-bold">Catégorie : </span><?php echo $book->getCategorie() ?></li>
-              <li class='list-group-item'><span class="font-weight-bold">Résumé : </span><?php echo $book->getResume() ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Identifiant : </span><?php echo $book->getB_id(); ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Titre : </span><?php echo $book->getTitle() ?>:</li>
+              <li class='list-group-item'><span class="font-weight-bold">Auteur : </span><?php echo $book->getAuthor() ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Date : </span><?php echo $book->getReleaseDate() ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Statut : </span><?php echo $book->getStatusIcon() ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Catégorie : </span><?php echo $book->getCategory() ?></li>
+              <li class='list-group-item'><span class="font-weight-bold">Résumé : </span><?php echo $book->getSummary() ?></li>
               <li class='list-group-item'>
                 <?php
                   //Show the the right form according to the disponibility of the book
-                  if($book->getDispo()) {
+                  if($book->getStatus()) {
                     include("../views/Forms/Emprunt.php");
                   }
                   else {

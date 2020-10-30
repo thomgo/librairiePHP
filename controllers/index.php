@@ -6,7 +6,7 @@ Autoloader::autoload();
 $bookManager = new BookManager();
 
 //If a form to add a book has been submitted
-if(!empty($_POST["ajoutLivre"])) {
+if(!empty($_POST["addBook"])) {
   //We create a new book object from the form
   $book = new Book($_POST);
   //We store the book in the database

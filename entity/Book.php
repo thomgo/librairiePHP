@@ -4,118 +4,118 @@ class Book {
 
   use Hydrator;
 
-  protected $l_id;
-  protected $titre;
-  protected $auteur;
-  protected $resume;
-  protected $parution;
-  protected $categorie;
-  protected $dispo;
-  protected $statut;
-  protected $utilisateur;
+  protected $b_id;
+  protected $title;
+  protected $author;
+  protected $summary;
+  protected $releaseDate;
+  protected $category;
+  protected $status;
+  protected $statusIcon;
+  protected $user;
 
   //Constructor
   public function __construct($array) {
-    $this->setDispo(1);
+    $this->setStatus(1);
     $this->hydrate($array);
   }
 
   //ID functions
-  public function setL_id($id) {
-    $this->l_id = $id;
+  public function setB_id($id) {
+    $this->b_id = $id;
   }
 
-  public function getL_id() {
-    return $this->l_id;
+  public function getB_id() {
+    return $this->b_id;
   }
 
-  //Titre functions
-  public function setTitre($titre) {
-    $this->titre = $titre;
+  //Title functions
+  public function setTitle(string $title) {
+    $this->title = $title;
   }
 
-  public function getTitre() {
-    return $this->titre;
+  public function getTitle() {
+    return $this->title;
   }
 
   //Auteur functions
-  public function setAuteur($auteur) {
-    $this->auteur = $auteur;
+  public function setAuthor($author) {
+    $this->author = $author;
   }
 
-  public function getAuteur() {
-    return $this->auteur;
+  public function getAuthor() {
+    return $this->author;
   }
 
   //Resume functions
-  public function setResume($resume) {
-    $this->resume = $resume;
+  public function setSummary($summary) {
+    $this->summary = $summary;
   }
 
-  public function getResume() {
-    return $this->resume;
+  public function getSummary() {
+    return $this->summary;
   }
 
   //Parution functions
-  public function setParution($parution) {
-    $this->parution = $parution;
+  public function setReleaseDate($releaseDate) {
+    $this->releaseDate = $releaseDate;
   }
 
-  public function getParution() {
-    return $this->parution;
+  public function getReleaseDate() {
+    return $this->releaseDate;
   }
 
   //Categorie functions
-  public function setCategorie($categorie) {
-    $this->categorie = $categorie;
+  public function setCategory($category) {
+    $this->category = $category;
   }
 
-  public function getCategorie() {
-    return $this->categorie;
+  public function getCategory() {
+    return $this->category;
   }
 
   //Dispo functions
-  public function setDispo($dispo) {
-    $this->dispo = $dispo;
+  public function setStatus($status) {
+    $this->status = $status;
     //Call the statut function to store it in the same time
-    $this->setStatut($this->getDispo());
+    $this->setStatusIcon($status);
   }
 
-  public function getDispo() {
-    return $this->dispo;
+  public function getStatus() {
+    return $this->status;
   }
 
   //Statut functions
-  //Based on dispo attribut store a string in $statut attribut
-  public function setStatut($dispo) {
-    if($dispo) {
-      $this->statut = "<i class='far fa-check-circle' style='color:green'></i>";
+  //Based on dispo attribut store a string in $statusIcon attribut
+  public function setStatusIcon($status) {
+    if($status) {
+      $this->statusIcon = "<i class='far fa-check-circle' style='color:green'></i>";
     }
     else {
-      $this->statut = "<i class='far fa-times-circle' style='color:red'></i>";
+      $this->statusIcon = "<i class='far fa-times-circle' style='color:red'></i>";
     }
   }
 
-  public function getStatut() {
-    return $this->statut;
+  public function getStatusIcon() {
+    return $this->statusIcon;
   }
 
   //Utilisateur functions
-  public function setUser(User $utilisateur) {
+  public function setUser(User $user) {
     //avoid empty user to be add
-    if($utilisateur->getfirstName()) {
-      $this->utilisateur = $utilisateur;
-      $this->setDispo(0);
+    if($user->getfirstName()) {
+      $this->user = $user;
+      $this->setStatus(0);
     }
   }
 
   public function unsetUser() {
-    $this->utilisateur = null;
-    $this->setDispo(1);
+    $this->user = null;
+    $this->setStatus(1);
   }
 
   public function getUser() {
-    return $this->utilisateur;
+    return $this->user;
   }
 }
 
