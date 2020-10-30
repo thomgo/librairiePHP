@@ -3,16 +3,16 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$livreManager = new livreManager();
-$utilisateurManager = new utilisateurManager();
+$bookManager = new BookManager();
+$userManager = new UserManager();
 
 //No default book selected
 $book = false;
 
 //If there is a book id in the url
-if(isset($_GET["livre"]) && !empty($_GET["livre"])) {
+if(isset($_GET["book"]) && !empty($_GET["book"])) {
   // On récupère les informations relatives à ce livre pour affichage
-  $book = $livreManager->getBookAndUser($_GET["livre"]);
+  $book = $bookManager->getBookAndUser($_GET["book"]);
 }
 //Otherwise we make an error message
 else {
@@ -22,20 +22,20 @@ else {
 //If a borrowing form has been submitted
 if(!empty($_POST["prete"])) {
   //We get from the database the user we the given code
-  $utilisateur = $utilisateurManager->getUser($_POST["personnalCode"]);
+  $utilisateur = $userManager->getUser($_POST["personnalCode"]);
   //If a user has been found we update the book
   if($utilisateur) {
     $book->setUtilisateur($utilisateur);
-    $livreManager->borrowBook($book);
+    $bookManager->borrowBook($book);
   }
 }
 
 //If a form to give back a book has been submitted
 if(!empty($_POST["rendu"])) {
   $book->unsetUtilisateur();
-  $livreManager->turnBookBack($book);
+  $bookManager->turnBookBack($book);
 }
 
 
-include "../views/livreView.php";
+include "../views/bookView.php";
  ?>

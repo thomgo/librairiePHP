@@ -3,7 +3,7 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$userManager = new utilisateurManager();
+$userManager = new UserManager();
 
 //If a form to add a user has been submitted
 if(!empty($_POST["addUser"])) {

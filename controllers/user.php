@@ -3,8 +3,8 @@
 require_once("../services/Autoloader.php");
 Autoloader::autoload();
 
-$livreManager = new livreManager();
-$utilisateurManager = new utilisateurManager();
+$bookManager = new BookManager();
+$utilisateurManager = new UserManager();
 
 //No default book selected
 $user = false;

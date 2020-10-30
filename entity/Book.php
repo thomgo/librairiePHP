@@ -1,6 +1,6 @@
 <?php
 
-class Livre {
+class Book {
 
   use Hydrator;
 
@@ -101,7 +101,7 @@ class Livre {
   }
 
   //Utilisateur functions
-  public function setUtilisateur(Utilisateur $utilisateur) {
+  public function setUser(User $utilisateur) {
     //avoid empty user to be add
     if($utilisateur->getfirstName()) {
       $this->utilisateur = $utilisateur;
@@ -109,12 +109,12 @@ class Livre {
     }
   }
 
-  public function unsetUtilisateur() {
+  public function unsetUser() {
     $this->utilisateur = null;
     $this->setDispo(1);
   }
 
-  public function getUtilisateur() {
+  public function getUser() {
     return $this->utilisateur;
   }
 }

@@ -1,11 +1,11 @@
 <?php
 
-class utilisateurManager {
+class UserManager {
   private $_db;
 
   public function __construct() {
     //We store a PDO connexion when the manager in instanciated
-    $this->setDb(dataBase::BD());
+    $this->setDb(Database::BD());
   }
 
   public function setDb($connection) {
@@ -21,7 +21,7 @@ class utilisateurManager {
     $query = $this->getDb()->query('SELECT * FROM utilisateur');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
-      $data[$key] = new Utilisateur($value);
+      $data[$key] = new User($value);
     }
     return $data;
   }
@@ -36,10 +36,10 @@ class utilisateurManager {
     $query->execute([$id]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     //Create the user with the first row and then instanciate each book
-    $user = new Utilisateur($data[0]);
+    $user = new User($data[0]);
     foreach ($data as $key => $book) {
-      $book = new Livre($book);
-      $book->setUtilisateur($user);
+      $book = new Book($book);
+      $book->setUser($user);
       $user->addBook($book);
     }
     return $user;
@@ -52,7 +52,7 @@ class utilisateurManager {
     $query->execute([":research" => $research]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
-      $data[$key] = new Utilisateur($value);
+      $data[$key] = new User($value);
     }
     return $data;
   }
@@ -64,7 +64,7 @@ class utilisateurManager {
     $data = $query->fetch(PDO::FETCH_ASSOC);
     //If a user ha been found creat an object an returns it
     if($data) {
-      $user = new Utilisateur($data);
+      $user = new User($data);
       return $user;
     }
     //Otherwise returns false

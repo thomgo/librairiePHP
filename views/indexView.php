@@ -54,7 +54,7 @@
           "<td>" . $book->getParution() . "</td>" .
           "<td>" . $book->getStatut() . "</td>" .
           "<td>" . $book->getCategorie() . "</td>" .
-          "<td><a href=livre.php?livre=". $book->getL_id() ."> Gérer </a></td>" .
+          "<td><a href=book.php?book=". $book->getL_id() ."> Gérer </a></td>" .
           "</tr>";
         }
      ?>

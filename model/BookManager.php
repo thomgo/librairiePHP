@@ -1,11 +1,11 @@
 <?php
 
-class livreManager {
+class BookManager {
   private $_db;
 
   public function __construct() {
     //We store a PDO connexion when the manager in instanciated
-    $this->setDb(dataBase::BD());
+    $this->setDb(Database::BD());
   }
 
   public function setDb($connection) {
@@ -21,7 +21,7 @@ class livreManager {
     $query = $this->getDb()->query('SELECT l_id, titre, auteur, resume, parution, dispo, categorie FROM livre');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
-      $data[$key] = new Livre($value);
+      $data[$key] = new Book($value);
     }
     return $data;
   }
@@ -32,7 +32,7 @@ class livreManager {
     $query->execute([$categorie]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
-      $data[$key] = new Livre($value);
+      $data[$key] = new Book($value);
     }
     return $data;
   }
@@ -49,15 +49,15 @@ class livreManager {
       $query->execute([$id]);
       $data = $query->fetch(PDO::FETCH_ASSOC);
       //Crée un noulivre avec les données
-      $book = new Livre($data);
-      $user = new Utilisateur($data);
+      $book = new Book($data);
+      $user = new User($data);
       //Hydrate un nouvel utilisateur sur la base du tableau
-      $book->setUtilisateur($user);
+      $book->setUser($user);
       return $book;
     }
 
   //Add book in BDD
-  public function addBook(Livre $book) {
+  public function addBook(Book $book) {
     $query = $this->getDb()->prepare("INSERT INTO livre (titre, auteur, resume, parution, dispo, categorie) VALUES (:titre, :auteur, :resume, :parution, :dispo, :categorie)");
     $query->execute([
       ":titre" => $book->getTitre(),
@@ -70,20 +70,20 @@ class livreManager {
   }
 
   //Update a book
-  public function borrowBook(Livre $book) {
+  public function borrowBook(Book $book) {
     $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
     $query->execute([
       ":dispo"=> $book->getDispo(),
-      ":utilisateur"=> $book->getUtilisateur()->getPersonnalCode(),
+      ":utilisateur"=> $book->getUser()->getPersonnalCode(),
       ":id" => $book->getL_id()
     ]);
   }
 
-  public function turnBookBack(Livre $book) {
+  public function turnBookBack(Book $book) {
     $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
     $query->execute([
       ":dispo"=> $book->getDispo(),
-      ":utilisateur"=> $book->getUtilisateur(),
+      ":utilisateur"=> $book->getUser(),
       ":id" => $book->getL_id()
     ]);
   }
