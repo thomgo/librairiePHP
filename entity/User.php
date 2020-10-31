@@ -106,7 +106,7 @@ class User {
   //Add a book to the books array
   public function addBook(Book $book) {
     //avoid empty books to be pushed
-    if($book->getTitre()){
+    if($book->getTitle()){
       array_push($this->books, $book);
     }
   }

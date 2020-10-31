@@ -11,7 +11,7 @@ $book = false;
 
 //If there is a book id in the url
 if(isset($_GET["book"]) && !empty($_GET["book"])) {
-  // On récupère les informations relatives à ce livre pour affichage
+  // Get the info on the book and an eventual user
   $book = $bookManager->getBookAndUser($_GET["book"]);
 }
 //Otherwise we make an error message
