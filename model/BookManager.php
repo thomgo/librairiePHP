@@ -80,11 +80,11 @@ class BookManager {
   }
 
   public function turnBookBack(Book $book) {
-    $query = $this->getDb()->prepare("UPDATE livre SET dispo = :dispo, utilisateur = :utilisateur WHERE l_id = :id");
+    $query = $this->getDb()->prepare("UPDATE livre SET status = :status, user = :user WHERE b_id = :b_id");
     $query->execute([
-      ":dispo"=> $book->getDispo(),
-      ":utilisateur"=> $book->getUser(),
-      ":id" => $book->getL_id()
+      ":status"=> $book->getStatus(),
+      ":user"=> $book->getUser(),
+      ":b_id" => $book->getB_id()
     ]);
   }
 

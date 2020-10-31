@@ -26,10 +26,10 @@ if($book) {
                 <?php
                   //Show the the right form according to the disponibility of the book
                   if($book->getStatus()) {
-                    include("../views/Forms/Emprunt.php");
+                    include("../views/Forms/borrowForm.php");
                   }
                   else {
-                    include("../views/Forms/Rendu.php");
+                    include("../views/Forms/returnForm.php");
                   }
                  ?>
               </li>
