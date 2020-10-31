@@ -27,6 +27,7 @@ if($book) {
                   //Show the the right form according to the disponibility of the book
                   if($book->getStatus()) {
                     include("../views/Forms/borrowForm.php");
+                    include("../views/Forms/deleteBookForm.php");
                   }
                   else {
                     include("../views/Forms/returnForm.php");
