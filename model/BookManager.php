@@ -88,6 +88,14 @@ class BookManager {
     ]);
   }
 
+  public function deleteBook(int $id) {
+    $query = $this->getDb()->prepare("DELETE FROM book WHERE b_id = :b_id");
+    $result = $query->execute([
+      "b_id" => $id
+    ]);
+    return $result;
+  }
+
 }
 
  ?>

@@ -19,6 +19,13 @@ else {
   $message = "Hum bizare, il semble que vous n'avez pas sélectionné de livre";
 }
 
+if(isset($_POST["deleteBook"])) {
+  if($bookManager->deleteBook($_POST["bookId"])){
+    header("Location: index.php");
+    exit();
+  }
+}
+
 //If a borrowing form has been submitted
 if(!empty($_POST["borrowBook"])) {
   //We get from the database the user we the given code
