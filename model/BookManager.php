@@ -42,9 +42,11 @@ final class BookManager {
       $data = $query->fetch(PDO::FETCH_ASSOC);
       // Make new book object with data array
       $book = new Book($data);
-      // Make new user object with data array
-      $user = new User($data);
-      $book->setUser($user);
+      if(isset($data["firstName"])) {
+        // Make new user object with data array
+        $user = new User($data);
+        $book->setUser($user);
+      }
       return $book;
     }
 
@@ -73,7 +75,7 @@ final class BookManager {
     return $result;
   }
 
-  public function deleteBook(int $id):book {
+  public function deleteBook(int $id):bool {
     $query = $this->_db->prepare("DELETE FROM book WHERE b_id = :b_id");
     $result = $query->execute([
       "b_id" => $id
