@@ -28,7 +28,7 @@ if(isset($_POST["deleteBook"])) {
 
 //If a borrowing form has been submitted
 if(!empty($_POST["borrowBook"])) {
-  //We get from the database the user we the given code
+  //We get from the database the user with the given code
   $user = $userManager->getUser($_POST["personnalCode"]);
   //If a user has been found we update the book
   if($user) {

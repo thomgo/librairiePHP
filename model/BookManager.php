@@ -8,14 +8,6 @@ class BookManager {
     $this->_db = Database::BD();
   }
 
-  // public function setDb($connection) {
-  //   $this->_db = $connection;
-  // }
-  //
-  // public function getDb() {
-  //   return $this->_db;
-  // }
-
   //Function to get all the books at once
   public function getBooks() {
     $query = $this->_db->query('SELECT b_id, title, author, summary, releaseDate, status, category FROM book');
