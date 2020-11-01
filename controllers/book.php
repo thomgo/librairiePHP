@@ -33,14 +33,14 @@ if(!empty($_POST["borrowBook"])) {
   //If a user has been found we update the book
   if($user) {
     $book->setUser($user);
-    $bookManager->borrowBook($book);
+    $bookManager->updateBookStatus($book, $book->getUser()->getPersonnalCode());
   }
 }
 
 //If a form to give back a book has been submitted
 if(!empty($_POST["returnBook"])) {
   $book->unsetUser();
-  $bookManager->turnBookBack($book);
+  $bookManager->updateBookStatus($book, $book->getUser());
 }
 
 

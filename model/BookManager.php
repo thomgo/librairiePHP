@@ -70,20 +70,11 @@ class BookManager {
   }
 
   //Update a book
-  public function borrowBook(Book $book) {
+  public function updateBookStatus(Book $book, ?string $user_info) {
     $query = $this->getDb()->prepare("UPDATE book SET status = :status, user = :user WHERE b_id = :b_id");
     $query->execute([
       ":status"=> $book->getStatus(),
-      ":user"=> $book->getUser()->getPersonnalCode(),
-      ":b_id" => $book->getB_id()
-    ]);
-  }
-
-  public function turnBookBack(Book $book) {
-    $query = $this->getDb()->prepare("UPDATE book SET status = :status, user = :user WHERE b_id = :b_id");
-    $query->execute([
-      ":status"=> $book->getStatus(),
-      ":user"=> $book->getUser(),
+      ":user"=> $user_info,
       ":b_id" => $book->getB_id()
     ]);
   }
