@@ -1,23 +1,15 @@
 <?php
 
-class BookManager {
-  private $_db;
+final class BookManager {
+  private PDO $_db;
 
   public function __construct() {
     //We store a PDO connexion when the manager in instanciated
     $this->_db = Database::BD();
   }
 
-  // public function setDb($connection) {
-  //   $this->_db = $connection;
-  // }
-  //
-  // public function getDb() {
-  //   return $this->_db;
-  // }
-
   //Function to get all the books at once
-  public function getBooks() {
+  public function getBooks():array {
     $query = $this->_db->query('SELECT b_id, title, author, summary, releaseDate, status, category FROM book');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
@@ -27,7 +19,7 @@ class BookManager {
   }
 
   //Function to get all the books at once sorted by categorie
-  public function getBooksByCategorie($category) {
+  public function getBooksByCategorie(string $category):array {
     $query = $this->_db->prepare("SELECT b_id, title, author, summary, releaseDate, status, category FROM book WHERE category = ?");
     $query->execute([$category]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +30,7 @@ class BookManager {
   }
 
   //Get a single book with user based on id
-    public function getBookAndUser($id) {
+    public function getBookAndUser(int $id):Book {
       $query = $this->_db->prepare("SELECT
         b.b_id, b.title, b.author, b.summary, b.releaseDate, b.status, b.category,
         u.firstName, u.lastName, u.age, u.city, u.phone, u.mail, u.personnalCode
@@ -50,16 +42,18 @@ class BookManager {
       $data = $query->fetch(PDO::FETCH_ASSOC);
       // Make new book object with data array
       $book = new Book($data);
-      // Make new user object with data array
-      $user = new User($data);
-      $book->setUser($user);
+      if(isset($data["firstName"])) {
+        // Make new user object with data array
+        $user = new User($data);
+        $book->setUser($user);
+      }
       return $book;
     }
 
   //Add book in BDD
-  public function addBook(Book $book) {
+  public function addBook(Book $book):bool {
     $query = $this->_db->prepare("INSERT INTO book (title, author, summary, releaseDate, status, category) VALUES (:title, :author, :summary, :releaseDate, :status, :category)");
-    $query->execute([
+    $result = $query->execute([
       ":title" => $book->getTitle(),
       ":author"=> $book->getAuthor(),
       ":summary"=> $book->getSummary(),
@@ -67,19 +61,21 @@ class BookManager {
       ":status"=> $book->getStatus(),
       ":category"=> $book->getCategory()
     ]);
+    return $result;
   }
 
   //Update a book
-  public function updateBookStatus(Book $book, ?string $user_info) {
+  public function updateBookStatus(Book $book, ?string $user_info):bool {
     $query = $this->_db->prepare("UPDATE book SET status = :status, user = :user WHERE b_id = :b_id");
-    $query->execute([
+    $result = $query->execute([
       ":status"=> $book->getStatus(),
       ":user"=> $user_info,
       ":b_id" => $book->getB_id()
     ]);
+    return $result;
   }
 
-  public function deleteBook(int $id) {
+  public function deleteBook(int $id):bool {
     $query = $this->_db->prepare("DELETE FROM book WHERE b_id = :b_id");
     $result = $query->execute([
       "b_id" => $id

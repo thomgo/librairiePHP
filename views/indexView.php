@@ -7,13 +7,13 @@
 <div class="flex">
   <!-- Sorting form -->
   <form action="" method="post" class="flex">
-    <select class="form-control mr-3" name="categorie">
+    <select class="form-control mr-3" name="category">
       <option value="false">Toutes catégories</option>
      <option value="fantastique">Fantastique</option>
      <option value="poesie">Poesie</option>
      <option value="roman">Roman</option>
     </select>
-    <input class="btn bgViolet"type="submit" name="trie" value="Trier">
+    <input class="btn bgViolet"type="submit" name="sortBook" value="Trier">
   </form>
 
   <!-- Button trigger modal -->

@@ -1,7 +1,7 @@
 <?php
 
 class UserManager {
-  private $_db;
+  private PDO $_db;
 
   public function __construct() {
     //We store a PDO connexion when the manager in instanciated
@@ -9,7 +9,7 @@ class UserManager {
   }
 
   //Function to get all the users at once
-  public function getUsers() {
+  public function getUsers():array {
     $query = $this->_db->query('SELECT * FROM user');
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($data as $key => $value) {
@@ -19,7 +19,7 @@ class UserManager {
   }
 
   //function to get one user based on it's ID with the books he borrowed
-  public function getUserById($id) {
+  public function getUserById(int $id):?User {
     $query = $this->_db->prepare('SELECT
       b.title, b.author, b.releaseDate, b.category,
       u.u_id, u.firstName, u.lastName, u.age, u.city, u.phone, u.mail, u.personnalCode
@@ -42,7 +42,7 @@ class UserManager {
 
 
   //Get user sorted according to a form
-  public function getUserSorted($research) {
+  public function getUserSorted(string $research):array {
     $query = $this->_db->prepare('SELECT * FROM user WHERE firstName = :research OR lastName = :research OR personnalCode = :research');
     $query->execute([":research" => $research]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@ class UserManager {
   }
 
 //Get a single user based on personnalCode
-  public function getUser($personnalCode) {
+  public function getUser(string $personnalCode):?User {
     $query = $this->_db->prepare("SELECT * FROM user WHERE personnalCode = ?");
     $query->execute([$personnalCode]);
     $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@ class UserManager {
   }
 
   //Function to check if the personnal code is already in use
-  public function checkCode(User $user) {
+  public function checkCode(User $user):bool {
     $query = $this->_db->prepare('SELECT * FROM user WHERE personnalCode = ?');
     $query->execute([$user->getPersonnalCode()]);
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -80,9 +80,9 @@ class UserManager {
   }
 
   //Function to add a user in data base
-  public function addUser(User $user) {
+  public function addUser(User $user):bool {
     $query = $this->_db->prepare("INSERT INTO user (firstName, lastName, age, city, phone, mail, personnalCode) VALUES (:firstName, :lastName, :age, :city, :phone, :mail, :personnalCode)");
-    $query->execute([
+    $result = $query->execute([
       ":firstName" => $user->getFirstName(),
       ":lastName"=> $user->getLastName(),
       ":age"=> $user->getAge(),
@@ -91,6 +91,7 @@ class UserManager {
       ":mail"=> $user->getMail(),
       ":personnalCode"=> $user->getPersonnalCode()
     ]);
+    return $result;
   }
 }
 

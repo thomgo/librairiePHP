@@ -14,9 +14,9 @@ if(!empty($_POST["addBook"])) {
 }
 
 //If a sorting form with a category has been submitted
-if(!empty($_POST["trie"]) && $_POST["categorie"] != "false") {
+if(!empty($_POST["sortBook"]) && $_POST["category"] != "false") {
   //We get from the database the books with that category
-  $books = $bookManager->getBooksByCategorie($_POST["categorie"]);
+  $books = $bookManager->getBooksByCategorie($_POST["category"]);
 }
 //Otherwise we just get all the books
 else{
