@@ -2,9 +2,9 @@
 //Class for autoloading of classes in the app
 class Autoloader {
   //Entities, services and managers list are stored in class constants
-  const entities = ["Livre", "Utilisateur"];
+  const entities = ["Book", "User"];
   const services= ["Autoloader", "Hydrator"];
-  const managers = ["livreManager", "utilisateurManager", "dataBase"];
+  const managers = ["BookManager", "UserManager", "Database"];
 
   //Function to call autoload register with the static loader function
   static public function autoload() {
@@ -15,7 +15,7 @@ class Autoloader {
   //For exempel if the class name is an entity the we load it from entities
   static public function loader($class){
     if(in_array($class, self::entities)) {
-      require("../entities/" . $class . ".php");
+      require("../entity/" . $class . ".php");
     }
     elseif (in_array($class, self::managers)) {
       require("../model/" . $class . ".php");

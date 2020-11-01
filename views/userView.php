@@ -37,7 +37,7 @@ if($user) {
               <?php
                 foreach ($user->getBooks() as $key => $book) {
               ?>
-                  <li class='list-group-item'><?php echo $book->getTitre() . " de " . $book->getAuteur(); ?></li>
+                  <li class='list-group-item'><?php echo $book->getTitle() . " de " . $book->getAuthor(); ?></li>
               <?php
                 }
                ?>

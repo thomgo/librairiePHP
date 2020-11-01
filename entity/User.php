@@ -1,6 +1,6 @@
 <?php
 
-class Utilisateur {
+class User {
   use Hydrator;
 
   protected $u_id;
@@ -104,9 +104,9 @@ class Utilisateur {
   }
 
   //Add a book to the books array
-  public function addBook(Livre $book) {
+  public function addBook(Book $book) {
     //avoid empty books to be pushed
-    if($book->getTitre()){
+    if($book->getTitle()){
       array_push($this->books, $book);
     }
   }

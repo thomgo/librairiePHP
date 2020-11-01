@@ -26,7 +26,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content p-3">
         <h3 class="text-center mb-2">Nouveau livre</h3>
-        <?php include("Forms/addBook.php"); ?>
+        <?php include("Forms/addBookForm.php"); ?>
       </div>
     </div>
   </div>
@@ -48,13 +48,13 @@
     <?php
         foreach ($books as $book) {
           echo "<tr>" .
-          "<td>" . $book->getL_id() . "</td>" .
-          "<td>" . $book->getTitre() . "</td>" .
-          "<td>" . $book->getAuteur() . "</td>" .
-          "<td>" . $book->getParution() . "</td>" .
-          "<td>" . $book->getStatut() . "</td>" .
-          "<td>" . $book->getCategorie() . "</td>" .
-          "<td><a href=livre.php?livre=". $book->getL_id() ."> Gérer </a></td>" .
+          "<td>" . $book->getB_id() . "</td>" .
+          "<td>" . $book->getTitle() . "</td>" .
+          "<td>" . $book->getAuthor() . "</td>" .
+          "<td>" . $book->getReleaseDate() . "</td>" .
+          "<td>" . $book->getStatusIcon() . "</td>" .
+          "<td>" . $book->getCategory() . "</td>" .
+          "<td><a href=book.php?book=". $book->getB_id() ."> Gérer </a></td>" .
           "</tr>";
         }
      ?>
