@@ -52,35 +52,59 @@ final class BookManager {
 
   //Add book in BDD
   public function addBook(Book $book):bool {
-    $query = $this->_db->prepare("INSERT INTO book (title, author, summary, releaseDate, status, category) VALUES (:title, :author, :summary, :releaseDate, :status, :category)");
-    $result = $query->execute([
-      ":title" => $book->getTitle(),
-      ":author"=> $book->getAuthor(),
-      ":summary"=> $book->getSummary(),
-      ":releaseDate"=> $book->getReleaseDate(),
-      ":status"=> $book->getStatus(),
-      ":category"=> $book->getCategory()
-    ]);
-    return $result;
+    try {
+      $this->_db->beginTransaction();
+      $query = $this->_db->prepare("INSERT INTO book (title, author, summary, releaseDate, status, category) VALUES (:title, :author, :summary, :releaseDate, :status, :category)");
+      $result = $query->execute([
+        ":title" => $book->getTitle(),
+        ":author"=> $book->getAuthor(),
+        ":summary"=> $book->getSummary(),
+        ":releaseDate"=> $book->getReleaseDate(),
+        ":status"=> $book->getStatus(),
+        ":category"=> $book->getCategory()
+      ]);
+      $this->_db->commit();
+      return $result;
+    }
+    catch (Exception $e) {
+      $this->_db->rollBack();
+      return false;
+    }
   }
 
   //Update a book
   public function updateBookStatus(Book $book, ?string $user_info):bool {
-    $query = $this->_db->prepare("UPDATE book SET status = :status, user = :user WHERE b_id = :b_id");
-    $result = $query->execute([
-      ":status"=> $book->getStatus(),
-      ":user"=> $user_info,
-      ":b_id" => $book->getB_id()
-    ]);
-    return $result;
+    try {
+      $this->_db->beginTransaction();
+      $query = $this->_db->prepare("UPDATE book SET status = :status, user = :user WHERE b_id = :b_id");
+      $result = $query->execute([
+        ":status"=> intval($book->getStatus()),
+        ":user"=> $user_info,
+        ":b_id" => $book->getB_id()
+      ]);
+      $this->_db->commit();
+      return $result;
+    }
+    catch (Exception $e) {
+      $this->_db->rollBack();
+      return false;
+    }
   }
 
   public function deleteBook(int $id):bool {
-    $query = $this->_db->prepare("DELETE FROM book WHERE b_id = :b_id");
-    $result = $query->execute([
-      "b_id" => $id
-    ]);
-    return $result;
+    try {
+      $this->_db->beginTransaction();
+      $query = $this->_db->prepare("DELETE FROM book WHERE b_id = :b_id");
+      $result = $query->execute([
+        "b_id" => $id
+      ]);
+      $this->_db->commit();
+      return $result;
+    }
+    catch (Exception $e) {
+      $this->_db->rollBack();
+      return false;
+    }
   }
 
 }
